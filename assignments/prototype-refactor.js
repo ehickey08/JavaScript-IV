@@ -235,18 +235,18 @@ class Humanoid  extends CharacterStats{
         hitChance: 0.85,
     });
 
-    //The nuisances of the battle
-    console.log(`\n\n*******ENEMIES MEET*******`);
-    console.log(goodGuy.battle(boss));
-    console.log(boss.battle(goodGuy));
-    console.log(goodGuy.greet());
-    console.log(boss.greet());
-    console.log(`\n\n*******BATTLE BEGINS*******`);
+    // //The nuisances of the battle
+    // console.log(`\n\n*******ENEMIES MEET*******`);
+    // console.log(goodGuy.battle(boss));
+    // console.log(boss.battle(goodGuy));
+    // console.log(goodGuy.greet());
+    // console.log(boss.greet());
+    // console.log(`\n\n*******BATTLE BEGINS*******`);
     
-    //The battle. It will go back and forth until someone dies. 
-    do{
-        goodGuy.setHealth(boss.attack());
-        boss.setHealth(goodGuy.attack());
-    }while((goodGuy.healthPoints>0 && boss.healthPoints>0));
+    // //The battle. It will go back and forth until someone dies. 
+    // do{
+    //     goodGuy.setHealth(boss.attack());
+    //     boss.setHealth(goodGuy.attack());
+    // }while((goodGuy.healthPoints>0 && boss.healthPoints>0));
 
-    console.log(`${goodGuy.name} celebrates with a ${goodGuy.winningCheer}!!!!`); //This will be awkward if Mario dies.
+    // console.log(`${goodGuy.name} celebrates with a ${goodGuy.winningCheer}!!!!`); //This will be awkward if Mario dies.
