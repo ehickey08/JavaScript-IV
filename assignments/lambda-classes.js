@@ -28,16 +28,31 @@ class Instructor extends Person {
     grade (student, subject) {
         console.log(`${student.name} receives a perfect score on ${subject}`)
     }
+
+    randomGradeChange (student) {
+        const valueChange = Math.floor(Math.random()*10);
+        const direction = Math.random();
+        const origGrade = student.grade;
+
+            if(direction>=0.50){
+                student.grade += valueChange;
+            } else {
+                student.grade -= valueChange;
+            }
+        
+        console.log(`${student.name}'s grade was changed from ${origGrade} to ${student.grade} by ${this.name}.`)
+    }
 }
 
 class Student extends Person {
-    constructor ({previousBackground, className, favSubjects, ...rest}) {
+    constructor ({grade, previousBackground, className, favSubjects, ...rest}) {
         super(rest);
         this.previousBackground = previousBackground;
         this.className = className;
         this.favSubjects = favSubjects;
+        this.grade = grade;
     }
-
+    
     listsSubjects() {
         console.log(`${this.name}'s favorite subjects are ${this.favSubjects}.`);
     }
@@ -48,6 +63,14 @@ class Student extends Person {
 
     sprintChallenge (subject) {
         console.log(`${this.name} has begun sprint challenge on ${subject}.`)
+    }
+    
+    graduate () {
+        if(this.grade>70){
+            console.log(`Congrats! ${this.name}, you have graduated from Lambda School!`);
+        } else {
+            console.log(`You are close to graduating. Redo some assignments and see if an instructor or Project Manager will change your grade.`)
+        }
     }
 }
 
@@ -64,6 +87,11 @@ class ProjectManager extends Instructor {
 
     debugsCode (student, subject) {
         console.log(`${this.name} debugs ${student.name}'s code on ${subject}.`)
+    }
+
+    randomGradeChange (student){//just wanted to practice inheriting a method and slightly changing that method
+        super.randomGradeChange(student);
+        console.log(`Only Project Manager's should be changing grades. What was our instructor doing?`);
     }
 } 
 
@@ -120,7 +148,8 @@ const ethan = new Student ({
     gender: 'Male',
     previousBackground: 'Teacher',
     className: 'Web20',
-    favSubjects: ['Html', ' CSS', ' JavaScript']
+    favSubjects: ['Html', ' CSS', ' JavaScript'],
+    grade: 52
 })
 
 const joe = new Student ({
@@ -130,7 +159,8 @@ const joe = new Student ({
     gender: 'Male',
     previousBackground: 'NFL Quarterback',
     className: 'Web18',
-    favSubjects: ['React' , ' Python', ' AJAX']
+    favSubjects: ['React' , ' Python', ' AJAX'],
+    grade: 91
 })
 
 //Create random PMs
@@ -158,6 +188,8 @@ const jeremiah = new ProjectManager({
     gradClassName: 'Web5',
     favInstructor: 'Austen'
 })
+
+
 //Test Persons
 
 console.log(`\n*****Persons*****`);
@@ -188,3 +220,18 @@ console.log(`\n****Project Managers*****`);
 console.log(josh, jeremiah);
 josh.standUp('web20_help');
 jeremiah.debugsCode(joe, 'CSS');
+
+//Stretch
+
+console.log(`\n*****Stretch Work*****\n`);
+console.log('Joe\'s grade:', joe.grade);
+dan.randomGradeChange(joe, '\n');
+jeremiah.randomGradeChange(joe, '\n');
+
+let count = 0;
+while (ethan.grade<=70){
+    josh.randomGradeChange(ethan);
+    count ++;
+}
+console.log(`\nWell it took ${count} grade changes, but we finally made it!\n`)
+ethan.graduate();
